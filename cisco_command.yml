@@ -1,0 +1,21 @@
+---
+- hosts: cisco
+  vars_files: /home/ansible/cisco/secret
+  gather_facts: false
+  tasks:
+
+    - name: run show version on remote devices
+      ios_command:
+        commands: show version
+      register: version
+    - name: display version from remote devices
+      debug:
+        var: version
+
+    - name: run show interfaces transceiver on remote devices
+      ios_command:
+        commands: show interfaces transceiver
+      register: interfaces_transceiver
+    - name: display interfaces transceiver from remote devices
+      debug:
+        var: interfaces_transceiver

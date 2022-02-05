@@ -1,0 +1,12 @@
+---
+- hosts: cisco
+  vars_files: /home/ansible/cisco/secret
+  gather_facts: false
+  tasks:
+    - name: configure ntp server on remote devices
+      ios_config:
+        lines: ntp server "{{ ntp_server }}"
+      register: configure_ntp
+    - name: display configuration results from remote devices
+      debug:
+        var: configure_ntp
